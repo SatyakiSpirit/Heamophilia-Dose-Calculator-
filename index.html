@@ -8,30 +8,28 @@
 
     <form id="doseCalculatorForm">
         <label for="type">Type of Hemophilia:</label>
-        <select id="type" required>
+        <select id="type" style="text-align: center; padding: 40px; font-size: 20px;" required>
             <option value="A">Hemophilia A</option>
             <option value="B">Hemophilia B</option>
         </select>
-        <br><br>
-
+   
         <label for="weight">Patient Weight (kg):</label>
-        <input type="number" id="weight" required min="1">
-        <br><br>
-
+        <input type="number" id="weight" required min="1" style="text-align: center; padding: 35px; font-size: 15px;">
+    
         <label for="bleedingSite">Bleeding Site:</label>
-        <select id="bleedingSite" required>
+        <select id="bleedingSite" required style="text-align: center; padding: 40px; font-size: 20px;">
             <option value="knee">Knee Joint</option>
             <option value="elbow">Elbow Joint</option>
             <option value="shoulder">Shoulder Joint</option>
             <option value="ankle">Ankle Joint</option>
             <option value="brain">Brain Bleeding</option>
         </select>
-        <br><br>
-
-        <button type="button" onclick="calculateDose()">Calculate Dose</button>
+     
+<br><br>
+        <button type="button" onclick="calculateDose()" style="text-align: center; padding: 40px; font-size: 20px;">Calculate Dose</button>
     </form>
 
-    <h3 id="result"></h3>
+    <h1 id="result" style="background-color: red;border: 5px solid blue; display: inline-block; "></h1>
 
     <script>
         function calculateDose() {
@@ -59,7 +57,11 @@
                 }
             }
 
+            
+
             const dose = weight * doseFactor;
+
+            alert("Your Current Dose is "+dose+" UI");
             document.getElementById("result").textContent = `Calculated dose: ${dose} IU`;
         }
     </script>
