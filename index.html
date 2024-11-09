@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hemophilia Dose Calculator</title>
+</head>
+<body>
+    <h2>Hemophilia Patient Dose Calculator</h2>
+
+    <form id="doseCalculatorForm">
+        <label for="type">Type of Hemophilia:</label>
+        <select id="type" required>
+            <option value="A">Hemophilia A</option>
+            <option value="B">Hemophilia B</option>
+        </select>
+        <br><br>
+
+        <label for="weight">Patient Weight (kg):</label>
+        <input type="number" id="weight" required min="1">
+        <br><br>
+
+        <label for="bleedingSite">Bleeding Site:</label>
+        <select id="bleedingSite" required>
+            <option value="knee">Knee Joint</option>
+            <option value="elbow">Elbow Joint</option>
+            <option value="shoulder">Shoulder Joint</option>
+            <option value="ankle">Ankle Joint</option>
+            <option value="brain">Brain Bleeding</option>
+        </select>
+        <br><br>
+
+        <button type="button" onclick="calculateDose()">Calculate Dose</button>
+    </form>
+
+    <h3 id="result"></h3>
+
+    <script>
+        function calculateDose() {
+            const type = document.getElementById("type").value;
+            const weight = parseFloat(document.getElementById("weight").value);
+            const bleedingSite = document.getElementById("bleedingSite").value;
+
+            if (!weight || weight <= 0) {
+                document.getElementById("result").textContent = "Please enter a valid weight.";
+                return;
+            }
+
+            let doseFactor;
+            if (type === "A") {
+                if (bleedingSite === "brain") {
+                    doseFactor = 50; // IU/kg for Hemophilia A (brain bleeding)
+                } else {
+                    doseFactor = 30; // IU/kg for Hemophilia A (joint bleeding)
+                }
+            } else if (type === "B") {
+                if (bleedingSite === "brain") {
+                    doseFactor = 60; // IU/kg for Hemophilia B (brain bleeding)
+                } else {
+                    doseFactor = 40; // IU/kg for Hemophilia B (joint bleeding)
+                }
+            }
+
+            const dose = weight * doseFactor;
+            document.getElementById("result").textContent = `Calculated dose: ${dose} IU`;
+        }
+    </script>
+</body>
+</html>
