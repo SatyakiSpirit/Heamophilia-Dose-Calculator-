@@ -3,104 +3,44 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hemophilia Factor Dose Calculator</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f9;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            min-height: 100vh;
-            margin: 0;
-        }
-        .calculator {
-            background-color: #ffffff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0px 0px 15px rgba(0, 0, 0, 0.1);
-            width: 300px;
-        }
-        .calculator h2 {
-            margin: 0;
-            font-size: 1.5em;
-            color: #333;
-        }
-        .calculator label {
-            display: block;
-            margin-top: 10px;
-            font-weight: bold;
-        }
-        .calculator input, .calculator select, .calculator button {
-            width: 100%;
-            padding: 8px;
-            margin-top: 5px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-        }
-        .result {
-            margin-top: 20px;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            background-color: #e9f7e9;
-            color: #27a744;
-            font-weight: bold;
-            text-align: center;
-        }
-    </style>
+    <title>Hemophilia Society Calcutta Chapter - Factor Dose Calculator</title>
+    <link rel="stylesheet" href="style.css">
 </head>
 <body>
+    <div class="container">
+        <header>
+            <img src="logo.png" alt="Hemophilia Society Logo" class="logo">
+            <h1>Hemophilia Society Calcutta Chapter</h1>
+            <p>Factor Dose Calculator</p>
+        </header>
+        
+        <form id="doseCalculatorForm">
+            <label for="type">Type of Hemophilia:</label>
+            <select id="type" required>
+                <option value="A">Hemophilia A</option>
+                <option value="B">Hemophilia B</option>
+            </select>
 
-<div class="calculator">
-    <h2>Factor Dose Calculator</h2>
-    
-    <label for="hemophiliaType">Type of Hemophilia</label>
-    <select id="hemophiliaType">
-        <option value="A">Hemophilia A</option>
-        <option value="B">Hemophilia B</option>
-    </select>
+            <label for="weight">Weight of Patient (kg):</label>
+            <input type="number" id="weight" required>
 
-    <label for="weight">Weight of the Patient (kg)</label>
-    <input type="number" id="weight" placeholder="Enter weight" required>
+            <label for="bleeding">Place of Bleeding:</label>
+            <select id="bleeding" required>
+                <option value="medium">Medium - Joint bleeding (Knee, Elbow, Ankle, Shoulder)</option>
+                <option value="minor">Minor - Wrist, Finger, Black Spot under the Skin</option>
+                <option value="major">Major - Brain Hemorrhage, Internal Organ, Stomach Hematoma</option>
+            </select>
 
-    <label for="bleedingType">Place & Severity of Bleeding</label>
-    <select id="bleedingType">
-        <option value="medium">Medium (Joint bleeding)</option>
-        <option value="minor">Minor (Wrist, finger, skin)</option>
-        <option value="major">Major (Brain hemorrhage, internal organs)</option>
-    </select>
+            <button type="button" onclick="calculateDose()">Calculate Factor Dose</button>
+        </form>
 
-    <button onclick="calculateDose()">Calculate Dose</button>
+        <div id="result"></div>
 
-    <div id="result" class="result" style="display: none;"></div>
-</div>
+        <footer>
+            <p>Visit our website: <a href="http://www.hscc.co.in" target="_blank">www.hscc.co.in</a></p>
+        </footer>
+    </div>
 
-<script>
-    function calculateDose() {
-        const hemophiliaType = document.getElementById('hemophiliaType').value;
-        const weight = parseFloat(document.getElementById('weight').value);
-        const bleedingType = document.getElementById('bleedingType').value;
-
-        if (isNaN(weight) || weight <= 0) {
-            alert('Please enter a valid weight.');
-            return;
-        }
-
-        let doseFactor;
-        if (bleedingType === 'major') {
-            doseFactor = 100; // 100% for major bleeding
-        } else if (bleedingType === 'medium') {
-            doseFactor = hemophiliaType === 'A' ? 50 : 30; // Example dose factors
-        } else {
-            doseFactor = hemophiliaType === 'A' ? 20 : 15; // Example dose factors
-        }
-
-        const dose = (weight * doseFactor) / 2; // Simplified formula for example
-        document.getElementById('result').textContent = `Recommended Dose: ${dose.toFixed(2)} IU`;
-        document.getElementById('result').style.display = 'block';
-    }
-</script>
-
+    <script src="script.js"></script>
 </body>
 </html>
